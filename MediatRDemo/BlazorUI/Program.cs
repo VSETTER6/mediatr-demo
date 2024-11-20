@@ -1,4 +1,7 @@
 using BlazorUI.Data;
+using DemoLibrary;
+using DemoLibrary.DataAccess;
+using MediatR;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -14,6 +17,10 @@ namespace BlazorUI
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
+            builder.Services.AddSingleton<IDataAccess, DemoDataAccess>();
+            // Gör så att MediatR kommer åt hela mitt DemoLibrary för att leta efter min quieries och handlers.
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DemoLibraryMediatREntrypoint).Assembly));
+
 
             var app = builder.Build();
 
