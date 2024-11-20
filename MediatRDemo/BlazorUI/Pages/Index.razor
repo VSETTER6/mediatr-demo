@@ -8,6 +8,13 @@ Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
+<ul>
+    @foreach (var person in personModelList) 
+    {
+        <li>@person.FirstName @person.LastName</li>
+    }
+</ul>
+
 @code {
     List<PersonModel> personModelList;
 
